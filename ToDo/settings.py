@@ -75,11 +75,11 @@ TEMPLATES = [
 WSGI_APPLICATION = 'ToDo.wsgi.application'
 
 mongoengine.connect(
-db='local',
+# db='local',
 host=config('host'),
-username='seruderu',
-password=config('password'),
-authentication_source='admin'
+# username='seruderu',
+# password=config('password'),
+# authentication_source='admin'
 )
 
 # Database
