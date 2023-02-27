@@ -2,10 +2,20 @@ from django.shortcuts import render
 from .models import ToDo
 from django.http import HttpResponse
 
-def add_todo(request):
-    todo = ToDo(title='lel1', desc='tops', completed=True)
-    todo.save()
+def todo_list_view(request):
     
+    queryset = ToDo.objects.all()
 
-    return HttpResponse(f"{todo} {todo.desc}, {todo.completed} {todo.created}product saved")
-# Create your views here.
+    context = {'obj': queryset}
+
+    return render(request, 'home.html', context)
+
+def todo_detail_view(request, slug):
+
+    queryset = ToDo.objects.get(slug=slug)
+
+    context = {'obj': queryset}
+
+    return render(request, 'detail.html', context)
+   
+

@@ -1,0 +1,11 @@
+<p>lel</p>
+
+{% for x in obj %}
+<p>{{ x.title }}
+{{x.desc}}
+{{x.completed}}
+{{x.created}}
+{{x.id}}
+<a href="{% url 'detail' x.slug %}"">link</a></p>
+{% endfor %}
+
