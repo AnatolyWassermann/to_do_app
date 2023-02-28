@@ -1,14 +1,12 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from .models import ToDo
 from .forms import ToDoForm
-from django.utils.datastructures import MultiValueDictKeyError
+
 
 def todo_list_view(request):
     
     queryset = ToDo.objects.all()
-
     context = {'obj': queryset}
-
     return render(request, 'home.html', context)
 
 def todo_update_view(request, slug):
