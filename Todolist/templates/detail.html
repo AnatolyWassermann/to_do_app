@@ -1,7 +1,18 @@
-<p>lel</p>
+<form action="" method="post">
+    {% csrf_token %}
+Title:<br>
+<input name="title" value="{{ obj.title }}">
+<br><br>
+Description:<br>
+<input name="desc" value="{{ obj.desc }}">
+<br><br>
+Completed:<br>
+
+<input type="checkbox" name="completed"{% if obj.completed %} checked
+{% else %}{% endif %}>
 
 
-<p>{{ obj.title }}
-{{obj.desc}}
-{{obj.completed}}
-{{obj.created}}
+
+<br><br>
+<input type="submit" value="Submit">
+</form>

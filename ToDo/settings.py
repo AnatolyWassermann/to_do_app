@@ -79,7 +79,7 @@ mongoengine.connect(
 host=config('host'),
 # username='seruderu',
 # password=config('password'),
-# authentication_source='admin'
+authentication_source='admin'
 )
 
 # Database

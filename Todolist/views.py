@@ -1,6 +1,7 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import ToDo
 from .forms import ToDoForm
+from django.utils.datastructures import MultiValueDictKeyError
 
 def todo_list_view(request):
     
@@ -10,16 +11,31 @@ def todo_list_view(request):
 
     return render(request, 'home.html', context)
 
-def todo_detail_view(request, slug):
+def todo_update_view(request, slug):
 
-    queryset = ToDo.objects.get(slug=slug)
-
-    context = {'obj': queryset}
+    todo = ToDo.objects.get(slug=slug)
+    
+    if request.method == 'POST':
+        title = request.POST['title']
+        desc = request.POST['desc']
+        completed = request.POST.get('completed', False)
+        # if completed is not None:
+        #     completed = True 
+        # else:
+        #     completed = False        
+        todo.completed = bool(completed)
+        todo.title = title
+        todo.desc = desc
+        todo.save()
+        return redirect('home')
+    context = {
+        'obj' : todo
+    }
 
     return render(request, 'detail.html', context)
    
 
-def create_todo(request):
+def todo_create_view(request):
 
     if request.method == 'POST':
         form = ToDoForm(request.POST)
