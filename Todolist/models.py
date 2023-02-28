@@ -6,7 +6,7 @@ class ToDo(Document):
     title = StringField(required=True, max_length=100)
     desc = StringField(max_length=500)
     slug = StringField()
-    completed = BooleanField()
+    completed = BooleanField(default=False)
     created = DateTimeField(default=datetime.datetime.utcnow)
 
     def __str__(self):

@@ -1,6 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import ToDo
-from django.http import HttpResponse
+from .forms import ToDoForm
 
 def todo_list_view(request):
     
@@ -19,3 +19,14 @@ def todo_detail_view(request, slug):
     return render(request, 'detail.html', context)
    
 
+def create_todo(request):
+
+    if request.method == 'POST':
+        form = ToDoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = ToDoForm()
+    
+    return render(request, 'create_todo.html', {'form':form})
