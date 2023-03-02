@@ -1,11 +1,9 @@
 from django.urls import path
- 
-
-from .views import todo_list_view, todo_update_view, todo_create_view
+from .views import todo_list_view, todo_update_view, todo_create_view, todo_delete_view
 
 urlpatterns = [
     path('create/', todo_create_view, name='create'),
     path('<slug:slug>/', todo_update_view, name='update'),
-    path('', todo_list_view, name='home'),
-    
+    path('delete/<slug:slug>/', todo_delete_view, name='delete' ),
+    path('', todo_list_view, name='home'),    
 ]

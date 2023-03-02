@@ -14,16 +14,14 @@ def todo_update_view(request, slug):
     todo = ToDo.objects.get(slug=slug)
     
     if request.method == 'POST':
-        title = request.POST['title']
-        desc = request.POST['desc']
+        todo.title = request.POST['title']
+        todo.desc = request.POST['desc']
         completed = request.POST.get('completed', False)
         # if completed is not None:
         #     completed = True 
         # else:
         #     completed = False        
         todo.completed = bool(completed)
-        todo.title = title
-        todo.desc = desc
         todo.save()
         return redirect('home')
     context = {
@@ -44,3 +42,17 @@ def todo_create_view(request):
         form = ToDoForm()
     
     return render(request, 'create_todo.html', {'form':form})
+
+def todo_delete_view(request, slug):
+
+    todo = ToDo.objects.get(slug=slug)
+
+    if request.method == 'POST':
+        todo.delete()
+        return redirect('home')
+        
+    context = {
+        'obj': todo
+    }
+
+    return render(request, 'delete.html', context)
