@@ -40,8 +40,12 @@ def todo_create_view(request):
             return redirect('home')
     else:
         form = ToDoForm()
+
+    context = {
+        'form': form
+    }
     
-    return render(request, 'create_todo.html', {'form':form})
+    return render(request, 'create_todo.html', context)
 
 def todo_delete_view(request, slug):
 
