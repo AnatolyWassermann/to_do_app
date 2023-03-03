@@ -1,4 +1,3 @@
 /env
 .env
 to_do_app.code-workspace
-db.sqlite3

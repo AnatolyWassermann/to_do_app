@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
 from .models import ToDo
-from .forms import ToDoForm
 
 
 def todo_list_view(request):
@@ -34,18 +33,13 @@ def todo_update_view(request, slug):
 def todo_create_view(request):
 
     if request.method == 'POST':
-        form = ToDoForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('home')
-    else:
-        form = ToDoForm()
-
-    context = {
-        'form': form
-    }
+        title = request.POST['title']
+        desc = request.POST['desc']
+        user = request.user.pk
+        ToDo.objects.create(title=title, desc=desc, user=user)
+        return redirect('home')
     
-    return render(request, 'create_todo.html', context)
+    return render(request, 'create_todo.html')
 
 def todo_delete_view(request, slug):
 

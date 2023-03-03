@@ -1,17 +1,17 @@
-from django.db import models
+from django.contrib.auth.models import User
 import datetime
 from mongoengine import (Document, 
                          StringField, 
                          BooleanField, 
-                         DateTimeField)
-
-
+                         DateTimeField,
+                         IntField)
 
 
 
 class ToDo(Document):
     title = StringField(required=True, max_length=100)
     desc = StringField(max_length=500)
+    user = IntField(required=True)
     slug = StringField()
     completed = BooleanField(default=False)
     created = DateTimeField(default=datetime.datetime.utcnow)
