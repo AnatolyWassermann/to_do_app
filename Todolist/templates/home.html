@@ -1,8 +1,10 @@
 <a href="{% url 'create' %}">Create Todo</a>
 <a href="{% url 'login' %}">Login</a>
 <a href="{% url 'signup'%}">Signup</a>
+<p>Hello {{request.user.username}} </p>
 
 {% for x in obj %}
+{% if request.user.id == x.user %}
 <p>{{ x.title }}
 {{x.desc}}
 {{x.completed}}
@@ -11,5 +13,7 @@
 
 <a href="{% url 'update' x.slug %}">update</a>
 <a href="{% url 'delete' x.slug %}">delete</a></p>
+{% endif %}
 {% endfor %}
+
 
