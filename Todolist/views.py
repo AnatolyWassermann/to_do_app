@@ -25,7 +25,8 @@ def todo_detail_view(request, slug):
         # if completed is not None:
         #     completed = True 
         # else:
-        #     completed = False        
+        #     completed = False   
+        ''' mongodb expects bool type request '''     
         todo.completed = bool(completed)
         todo.save()
         return redirect('home')
