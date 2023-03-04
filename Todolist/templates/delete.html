@@ -1,6 +1,8 @@
+{% if request.user.id == obj.user %}
 <p>Would you like to delete this {{obj.title}} Todo?</p>
 <form action="" method="post">
     {% csrf_token %}
 <button>YES</button>
 <button>><a href="{% url 'home' %}">NO</a></button>
 </form>
+{% endif %}

@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 
 
 
-@login_required
+
 def todo_list_view(request):
     
     queryset = ToDo.objects.all()
@@ -14,7 +14,7 @@ def todo_list_view(request):
     return render(request, 'home.html', context)
 
 @login_required
-def todo_update_view(request, slug):
+def todo_detail_view(request, slug):
 
     todo = ToDo.objects.get(slug=slug)
     

@@ -1,3 +1,4 @@
+{% if request.user.id == obj.user %}
 <form action="" method="post">
     {% csrf_token %}
 Title:<br>
@@ -12,3 +13,4 @@ Completed:<br>
 <br><br>
 <input type="submit" value="Submit">
 </form>
+{% endif %}
