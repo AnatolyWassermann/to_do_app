@@ -15,7 +15,7 @@ def random_string_generator(size=5, chars = string.ascii_lowercase + string.digi
 
 class ToDo(Document):
     title = StringField(max_length=100, required=True)
-    desc = StringField(max_length=500)
+    desc = StringField()
     user = IntField(required=True)
     slug = StringField()
     completed = BooleanField(default=False)
@@ -28,15 +28,14 @@ class ToDo(Document):
         ''' since slugify function doesn't support mongoengine i customized it a bit '''
         if not self.slug:
             # self.slug = self.title.replace(' ', '-') + random_slug_generator(size=10)
-            title = str(self.title)
-            title = (
-                unicodedata.normalize("NFKD", title)
+            current_title = str(self.title)
+            current_title = (
+                unicodedata.normalize("NFKD", current_title)
                 .encode('ascii', 'ignore')
                 .decode('ascii')
             )
-        title = re.sub(r"[^\w\s-]", "", title.lower())
-        title = re.sub(r"[-\s]+", "-", title).strip("-_")
-      
-        self.slug = title + random_string_generator(size=5)
+            current_title = re.sub(r"[^\w\s-]", "", current_title.lower())
+            current_title = re.sub(r"[-\s]+", "-", current_title).strip("-_")
+            self.slug = current_title + random_string_generator(size=5)
 
         return super(ToDo, self).save(*args, **kwargs)
