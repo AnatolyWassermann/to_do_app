@@ -1,7 +1,10 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
+<head>
+    <title>{% block title %}Update {{obj.title|truncatechars:10}}{% endblock %}</title>
+   
+</head>
 {% if request.user.id == obj.user %}
 <div class="container mt-5">
     <div class="row justify-content-center">
