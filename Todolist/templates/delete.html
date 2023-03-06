@@ -1,8 +1,23 @@
-{% if request.user.id == obj.user %}
-<p>Would you like to delete this {{obj.title}} Todo?</p>
-<form action="" method="post">
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header">Are you sure you want to delete <b>{{obj.title}}</b> To Do?</div>
+            <div class="card-body">
+
+  <form method="post" class="d-inline">
     {% csrf_token %}
-<button>YES</button>
-<button><a href="{% url 'home' %}">NO</a></button>
-</form>
-{% endif %}
+    
+    <button type="submit" class="btn btn-danger" style="float: left;">Delete</button>
+    <a href="{% url 'home' %}" class="btn btn-secondary" style="float: right;">Cancel</a>
+
+  </form>
+</div>
+</div>
+</div>
+</div>
+</div>
+{% endblock %}

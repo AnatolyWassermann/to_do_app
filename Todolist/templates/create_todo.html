@@ -1,11 +1,30 @@
-<form action="" method="post">
-    {% csrf_token %}
-Title:<br>
-<input name="title">
-<br><br>
-Description:<br>
-<input name="desc">
-<br><br>
+{% extends 'base.html' %}
 
-<input type="submit" value="Submit">
-</form>
+{% block content %}
+
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header">Create To Do</div>
+          <div class="card-body">
+            <form method="post">
+              {% csrf_token %}
+              <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Title</label>
+                <input type="text" class="form-control" id="exampleFormControlInput1" name="title">          
+              </div>
+              <div class="mb-3">
+                <label for="exampleFormControlTextarea1" class="form-label">Description</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" name="desc" rows="8"></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary">Post</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% endblock content %}

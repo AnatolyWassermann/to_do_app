@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'Todolist',
     'users',
     'bootstrap5',
+  
 
     'django.contrib.admin',
     'django.contrib.auth',

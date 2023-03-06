@@ -1,16 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
 {% if request.user.id == obj.user %}
-<form action="" method="post">
-    {% csrf_token %}
-Title:<br>
-<input name="title" value="{{ obj.title }}">
-<br><br>
-Description:<br>
-<input name="desc" value="{{ obj.desc }}">
-<br><br>
-Completed:<br>
-<input type="checkbox" name="completed"{% if obj.completed %} checked
+<div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header">Update To Do</div>
+          <div class="card-body">
+            <form method="post">
+              {% csrf_token %}
+              <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Title</label>
+                <input type="text" class="form-control" id="exampleFormControlInput1" name="title" value="{{obj.title}}">          
+              </div>
+              <div class="mb-3">
+                <label for="exampleFormControlTextarea1" class="form-label">Description</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" name="desc" rows="8">{{obj.desc}}</textarea>
+              </div>
+              <div class="mb-3">
+                <p>Completed?</p>
+                <input type="checkbox" name="completed"{% if obj.completed %} checked
 {% else %}{% endif %}>
-<br><br>
-<input type="submit" value="Submit">
-</form>
-{% endif %}
+              </div>
+              <button type="submit" class="btn btn-primary">Update</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+  {% endblock content %}
+
+
+
+
+
+
+
+
+
+
+

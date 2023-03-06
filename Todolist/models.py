@@ -20,7 +20,10 @@ class ToDo(Document):
     slug = StringField()
     completed = BooleanField(default=False)
     created = DateTimeField(default=datetime.datetime.utcnow)
-
+    
+    meta = {
+        'ordering': ['-created']
+    }
     def __str__(self):
         return self.title
     
