@@ -27,7 +27,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -80,8 +80,6 @@ WSGI_APPLICATION = 'ToDo.wsgi.application'
 mongoengine.connect(
 db='mongo',
 host=config('host'),
-# username='seruderu',
-# password=config('password'),
 authentication_source='admin'
 )
 
@@ -91,8 +89,8 @@ DATABASES = {
         'NAME': config('DB_NAME'),
         'USER': config('DB_USER'),
         'PASSWORD': config('DB_PASSWORD'),
-        'HOST': 'localhost',
-        'PORT': '5432'
+        'HOST': config('DB_HOST'),
+        'PORT': config('DB_PORT')
     }
 }
 
