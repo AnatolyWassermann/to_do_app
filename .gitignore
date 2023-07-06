@@ -2,5 +2,4 @@
 .env
 to_do_app.code-workspace
 .dockerignore
-Dockerfile
 .vscode
