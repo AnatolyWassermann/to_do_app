@@ -89,7 +89,7 @@ WSGI_APPLICATION = 'ToDo.wsgi.application'
 
 connect(host=os.environ.get('MONGO_HOST'))
 
-PRODUCTION = False
+PRODUCTION = True
 
 if PRODUCTION:
     DATABASES = {
