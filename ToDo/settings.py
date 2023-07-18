@@ -89,16 +89,17 @@ WSGI_APPLICATION = 'ToDo.wsgi.application'
 
 connect(host=os.environ.get('MONGO_HOST'))
 
-PRODUCTION = True
+PRODUCTION = False
 
 if PRODUCTION:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': os.environ.get('DB_NAME'),
-            'USER': os.environ.get('DB_USER'),
+            'NAME': 'postgres',
+            'USER': 'postgres2',
             'PASSWORD': os.environ.get('DB_PASSWORD'),
-            'HOST': os.environ.get('DB_HOST'),
+            'HOST': '34.72.104.164',
+            'PORT': '5432'
             
         }
     }
@@ -106,7 +107,7 @@ if PRODUCTION:
 else:
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'ENGINE': 'django.db.backends.postgresql',
             'NAME': config('DB_NAME'),
             'USER': config('DB_USER'),
             'PASSWORD': config('DB_PASSWORD'),
