@@ -85,19 +85,31 @@ WSGI_APPLICATION = 'ToDo.wsgi.application'
 # host=config('host'),
 # authentication_source='admin'
 # )
+from google.cloud import secretmanager
+
+def get_secret(project_id, secret_id, version_id="latest"):
+    client = secretmanager.SecretManagerServiceClient()
+    secret_name = f"projects/{project_id}/secrets/{secret_id}/versions/{version_id}"
+    response = client.access_secret_version(request={"name": secret_name})
+    return response.payload.data.decode("UTF-8")
 
 
-connect(host=os.environ.get('MONGO_HOST'))
+db_password = get_secret("my-bio-web-page", "db_password")
+mongo_host = get_secret("my-bio-web-page", "mongo_host")
+
+
+connect(host=mongo_host)
 
 PRODUCTION = True
 
 if PRODUCTION:
+    
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
             'NAME': 'postgres',
-            'USER': 'postgres2',
-            'PASSWORD': os.environ.get('DB_PASSWORD'),
+            'USER': 'postgres',
+            'PASSWORD': db_password,
             'HOST': '34.72.104.164',
             'PORT': '5432'
             
