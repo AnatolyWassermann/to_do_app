@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 from pathlib import Path
 from decouple import config
 from mongoengine import connect
-import os
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -80,11 +80,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'ToDo.wsgi.application'
 
-# mongoengine.connect(
-# db='mongo',
-# host=config('host'),
-# authentication_source='admin'
-# )
 from google.cloud import secretmanager
 
 def get_secret(project_id, secret_id, version_id="latest"):
@@ -96,37 +91,19 @@ def get_secret(project_id, secret_id, version_id="latest"):
 
 db_password = get_secret("my-bio-web-page", "db_password")
 mongo_host = get_secret("my-bio-web-page", "mongo_host")
-
-
 connect(host=mongo_host)
-
-PRODUCTION = True
-
-if PRODUCTION:
     
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'postgres',
-            'USER': 'postgres',
-            'PASSWORD': db_password,
-            'HOST': '34.72.104.164',
-            'PORT': '5432'
-            
-        }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': db_password,
+        'HOST': '34.72.104.164',
+        'PORT': '5432'
+        
     }
-
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': config('DB_NAME'),
-            'USER': config('DB_USER'),
-            'PASSWORD': config('DB_PASSWORD'),
-            'HOST': config('DB_HOST'),
-            'PORT': config('DB_PORT')
-        }
-    }
+}
 
 
 # Password validation
